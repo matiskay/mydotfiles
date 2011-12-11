@@ -1,0 +1,21 @@
+<?php $${1:dock}_post = new WP_Query(); 
+    $$1_post -> query( 'cat=${2:categoria}&showposts=${3:numerodeposts}' ); 
+    $$1_post -> the_post(); 
+?>
+	<h2><a href="<?php the_permalink() ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
+	<img src="<?php bloginfo('template_url'); ?>/timthumb.php?src=<?php echo catch_that_image(); ?>&h=${4:150}&w=${5:210}&zc=1" align="left"/>
+    <?php the_excerpt('Continue Reading...') ?>
+		<ul>
+            <?php $var=$3; 
+            $$1_post = new WP_Query();
+            $$1_post -> query( 'cat=${6:otracategoria}&showposts=${7:numerpdeposts}' ); 
+            while( $$1_post -> have_posts() ) : $$1_post -> the_post(); 
+            ?>
+
+            <?php if ($var > $3) { ?>
+                <li><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></li>
+
+            <?php } $var = $var + 1; ?>
+			<?php endwhile; ?>
+        </ul>
+

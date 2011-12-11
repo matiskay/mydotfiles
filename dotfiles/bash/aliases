@@ -1,0 +1,69 @@
+# Shortcuts and functions that contains variable
+
+# Create a user interface for you
+
+# Goals
+# short:  One or two letters
+# defaults: Include common switches and arguments 
+# Management: Minimize yak shaving by writing functions to edit and
+#  reload aliases 
+# scripting: Use a scripting language if longer than a few lines
+
+# find the command counter command
+# history 1000 | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head
+
+# ls aliases
+
+# mysql
+alias mysql='/usr/local/mysql/bin/mysql'
+
+alias mysqldump='/usr/local/mysql/bin/mysqldump'
+
+# Add color to my life
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# Samples
+# alias zipr="zip -r" -> zipr directory.zip directory
+# alias ss="./script/server" 
+
+# Finder
+alias o='open . &'
+alias ff='open -a Firefox'
+
+# Processes
+alias tu='top -o cpu' #cpu
+alias tm='top -o vsize' #memory
+
+# Git
+alias g='git status'
+alias gb='git branch'
+alias gba='git branch -a'
+alias gc='git commit -v'
+alias gca='git commit -v -a'
+
+function gg() {
+  git commit -v -a -m "$*"
+}
+
+alias gco='git checkout'
+alias gd='git diff --color'
+# Alias for current projects
+
+# Check more thinks
+# && reload
+
+# ss, sg, sp, sc <- ideas for script folders
+
+function take {
+  mkdir $1
+  cd $1
+}
+
+# Shake
+alias srun='python manage.py'
+alias sinit='python manage.py initdb'
+
+#git 
+alias gl='git log --graph --pretty="format:%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset"'

@@ -1,0 +1,116 @@
+" My vimrc file
+" Use vim settings, rather than vi settings
+
+" This option stops vim from behaving ina a stongly vi -compatible way. 
+set nocompatible
+
+" Enables vim's syntax highlighting
+syntax on
+
+" Automatically indent when adding a curly bracket, etc.
+set smartindent
+
+" Tabs should be converted to a group of 2 spaces
+set shiftwidth=2
+set tabstop=2
+set expandtab
+set smarttab
+
+" Minimal number of screen lines to keep above and below the cursor.
+set scrolloff=999
+
+" Use UTF-8
+set encoding=utf-8
+
+" Set color scheme
+if has("gui_running")
+  colorscheme molokai
+else
+  colorscheme ir_black 
+endif
+
+" Status line
+set laststatus=2
+set statusline=
+set statusline+=%-3.3n\ 			" buffer number
+set statusline+=%f\ 				" filename 
+set statusline+=%h%m%r%w 			" status flags
+set statusline+=\[%{strlen(&ft)?&ft:'none'}]	" status flags
+set statusline+=%= 				" status flags
+set statusline+=0x%-8B 				" character value
+set statusline+=%-14(%l,%c%V%) 			" line, character
+set statusline+=%<%P				" line, character
+
+" Show line, number, cursor position.
+set ruler
+set number 
+set cursorline 
+
+" Display incomplete commands
+set showcmd
+
+" To insert timestamp, press F3
+nmap <F3> a<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
+imap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
+
+" To save, press ctrl-s
+nmap <C-s> :w<CR>
+imap <C-s> <Esc>:w<CR>a
+
+" Search as you type
+set incsearch
+
+" Ignore case when searching
+set ignorecase
+
+" Show autocomple menus
+set ignorecase
+
+" Show editing mode
+set showmode
+
+" Error bells are displayed visually
+set visualbell
+
+" Size of gvim window
+"set lines=35 columns=99
+
+" Don't display menu or toolbar. Just the screen
+"set guioptions-=m
+" set guioptions-=T
+
+" Fonts. Very Important
+if has('win32') || has('win64')
+    set guifont=monospace:h11
+elseif has('unix')
+    let &guifont="Inconsolata 12"
+endif
+
+" To load the plugin files for specific file types 
+filetype plugin on
+
+" To load the indent files for specific file types 
+filetype indent on
+
+" Drupal
+" To treat .inc, .module, .info and .install as php and drupal file to
+" use customizing snippets 
+if has("autocmd")
+    augroup drupal
+    autocmd BufRead *.inc set filetype=php.drupal
+    autocmd BufRead *.module set filetype=php.drupal
+    autocmd BufRead *.info set filetype=php.drupal
+    autocmd BufRead *.install set filetype=php.drupal
+    augroup END
+endif
+
+" To avoid .swp in the folder
+if has("win32") || has("win64")
+    set directory=$TMP
+else
+    set directory=/tmp
+end
+
+" Django
+autocmd Filetype python set ft=python.django 	" For snipmate
+autocmd Filetype html set ft=htmldjango.html 	" For snipmate

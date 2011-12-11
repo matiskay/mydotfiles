@@ -1,0 +1,17 @@
+# Type env in your command line to see the variables
+
+# Examples
+# export EDITOR="mate -w"
+# export EDITOR=mate
+# $EDITOR to reference the variable (Case sensitive)
+
+# export PATH=$PATH:~/bin # First find $PATH then in  ~/bin
+# Load your programs
+
+# export PATH=~/bin:$PATH # First find command in ~/bin then in
+# $PATH 
+
+# Use source ~/dotfiles/bash/env to load again your configuration
+# echo $PATH
+#
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"

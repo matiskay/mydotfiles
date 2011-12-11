@@ -1,0 +1,79 @@
+# \u         Username
+# \w         Current directory
+# \d         Date 
+# \D{fmt}    Date as sprintf
+# \h         Subdomain 
+# \H         Full hostname 
+export CLICOLOR=1
+export LSCOLORS=ExFxCxDxBxegedabagacad
+
+# Colors 
+export LS_OPTIONS='--color=auto'
+eval `gdircolors ~/.dir_colors`
+alias ls='gls $LS_OPTIONS -hF'
+
+#
+function parse_git_branch {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
+# Get more colors from archlinux wiki color bash prompt
+function proml {
+  local        BLUE="\[\033[0;34m\]"
+  local         RED="\[\033[0;31m\]"
+  local   LIGHT_RED="\[\033[1;31m\]"
+  local       GREEN="\[\033[0;32m\]"
+  local LIGHT_GREEN="\[\033[1;32m\]"
+  local       WHITE="\[\033[1;37m\]"
+  local  LIGHT_GRAY="\[\033[0;37m\]"
+  case $TERM in
+    xterm*)
+    TITLEBAR='\[\033]0;\u@\h:\w\007\]'
+    ;;
+    *)
+    TITLEBAR=""
+    ;;
+  esac
+
+# Escape [ $ ] using \
+# for example
+#  \[$EBLACK\]
+#  \$(my_awesome_function)
+
+PS1="${TITLEBAR}\
+$BLUE[$RED\u@\h:\w$GREEN\$(parse_git_branch)$BLUE]\
+$WHITE\$ "
+PS2='> '
+PS4='+ '
+}
+proml
+
+
+# Cope
+PATH=/Library/Perl/5.12/auto/share/dist/Cope:$PATH
+
+# Color man pages
+# Less Colors for Man Pages
+export LESS_TERMCAP_mb=$'\E[01;31m'       # begin blinking
+export LESS_TERMCAP_md=$'\E[01;38;5;74m'  # begin bold
+export LESS_TERMCAP_me=$'\E[0m'           # end mode
+export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
+export LESS_TERMCAP_so=$'\E[38;5;246m'    # begin standout-mode - info box
+export LESS_TERMCAP_ue=$'\E[0m'           # end underline
+export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
+
+# Remove annoying perl message
+# This setting is for the new UTF-8 terminal support
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+# Git autocompletition
+#source `brew --prefix git`/etc/bash_completion.d/git-completion.bash
+
+# Completion
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+  . `brew --prefix`/etc/bash_completion
+fi
+
+# rvm
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function'
